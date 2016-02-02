@@ -1,3 +1,4 @@
+install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 install.packages("knitr", repos = "http://cran.us.r-project.org")
 install.packages("glmnet", repos = "http://cran.us.r-project.org")
 install.packages("pROC", repos = "http://cran.us.r-project.org")
