@@ -18,10 +18,10 @@
 # under the License.
 
 export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 source $CUR_DIR/resources/datalayer-cli-colors.sh
+$CUR_DIR/resources/datalayer-echo-header.sh
 
-docker rm zeppelin-rserve > /dev/null
+docker rm -f zeppelin-rserve > /dev/null
 
 if [ -z "$DOCKER_ZEPPELIN_PORT" ]
 then
@@ -64,6 +64,6 @@ sudo docker run \
     -e ZEPPELIN_PORT=$DOCKER_ZEPPELIN_PORT \
     -e ZEPPELIN_NOTEBOOK_DIR=$DOCKER_ZEPPELIN_NOTEBOOK_DIR \
     -e MASTER=$DOCKER_SPARK_MASTER \
-    --name zeppelin-rserve \
+    --name datalayer-zeppelin-rserve \
     datalayer/zeppelin-rserve \
     "$@"

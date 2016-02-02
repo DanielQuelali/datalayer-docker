@@ -4,7 +4,7 @@
 
 [![Datalayer](http://datalayer.io/ext/images/logo_horizontal_072ppi.png)](http://datalayer.io)
 
-# Zeppelin Docker
+# Datalayer Docker Zeppelin
 
 ## Get the image from the Docker Repository
 

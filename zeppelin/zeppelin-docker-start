@@ -18,8 +18,8 @@
 # under the License.
 
 export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 source $CUR_DIR/resources/datalayer-cli-colors.sh
+$CUR_DIR/resources/datalayer-echo-header.sh
 
 docker rm zeppelin > /dev/null
 

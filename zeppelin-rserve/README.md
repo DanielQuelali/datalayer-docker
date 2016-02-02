@@ -6,7 +6,7 @@
 
 [![R](http://datalayer.io/ext/images/logo-R-200.png)](http://cran.r-project.org)
 
-# Zeppelin R Docker Image (based on Rserve)
+# Datalayer Docker Zeppelin R (based on Rserve)
 
 ## Get the image from the Docker Repository
 

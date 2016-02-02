@@ -17,7 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-source datalayer-cli-colors.sh
+echo
 
 echo -e $GREEN$BOLD""" Welcome to Apache Zeppelin Notebook on Docker provided by
              ___       __       __
@@ -28,3 +28,5 @@ echo -e $GREEN$BOLD""" Welcome to Apache Zeppelin Notebook on Docker provided by
 
  http://datalayer.io    @datalayerio
  docker@datalayer.io"""$NOBOLD$NOCOLOR
+
+echo
