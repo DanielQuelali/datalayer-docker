@@ -1,0 +1,122 @@
+#!/bin/bash
+
+# Licensed to Datalayer (http://datalayer.io) under one or
+# more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership. Datalayer licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $CUR_DIR/resources/datalayer-cli-colors.sh
+
+docker rm -f datalayer-ambari > /dev/null
+
+if [ -z "$DATALAYER_DOCKER_DETACHED" ]
+then
+  export DATALAYER_DOCKER_DETACHED=true
+fi
+
+echo -e "To save your the container"
+echo -e $BLUE"  \`docker commit $CONTAINER_NAME datalayer/$EMULATOR_IMAGE:$IMAGE_VERSION\`, and check with \`docker images | head\`"$NOCOLOR
+echo
+echo -e "To flatten and save the container"
+echo -e $BLUE"  \`docker export datalayer-ambari > datalayer-ambari.tar; cat $1.tar | docker import - datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
+echo
+
+docker \
+  run \
+  -d=$DATALAYER_DOCKER_DETACHED \
+  -i \
+  -t \
+  -P \
+  -p 88:88/tcp \
+  -p 88:88/udp \
+  -p 123:123/udp \
+  -p 389:389 \
+  -p 443:443 \
+  -p 464:464/tcp \
+  -p 464:464/udp \
+  -p 636:636 \
+  -p 749:749 \
+  -p 750:750/udp \
+  -p 2181:2181 \
+  -p 2222:22 \
+  -p 6080:6080 \
+  -p 8000:8000 \
+  -p 8020:8020 \
+  -p 8025:8025 \
+  -p 8042:8042 \
+  -p 8030:8030 \
+  -p 8050:8050 \
+  -p 8080:8080 \
+  -p 8088:8088 \
+  -p 8090:8090 \
+  -p 8141:8141 \
+  -p 8188:8188 \
+  -p 8190:8190 \
+  -p 8440:8440 \
+  -p 8441:8441 \
+  -p 8443:8443 \
+  -p 8671:8671 \
+  -p 10020:10020 \
+  -p 10200:10200 \
+  -p 11000:11000 \
+  -p 15000:15000 \
+  -p 16010:16010 \
+  -p 19888:19888 \
+  -p 50070:50070 \
+  -p 50470:50470 \
+  -p 50090:50090 \
+  -p 55188:55188 \
+  -h docker.datalayer.io \
+  --name datalayer-ambari \
+  --privileged \
+  datalayer/ambari:latest /bin/bash
+
+#  --net=host \
+
+if [ "$DATALAYER_DOCKER_DETACHED" == "true" ]
+then
+  echo -e $BLUE
+  echo -e $NOCOLOR
+  docker ps
+  docker ps | grep datalayer-ambari | grep '>4040'
+  export NAKED_IP=$(docker inspect --format="{{.NetworkSettings.IPAddress}}" datalayer-ambari)
+  echo
+  echo -e "Running on IP"
+  echo -e $YELLOW"  "$NAKED_IP$NOCOLOR
+  echo
+  echo -e "Execute a shell"
+  echo -e $YELLOW"  sudo docker exec -i -t $CONTAINER_NAME /bin/bash"$NOCOLOR
+  echo
+  echo -e "Attach with"
+  echo -e $YELLOW"  docker attach $CONTAINER_NAME"$NOCOLOR
+  echo
+  echo -e "Connect with"
+  echo -e $YELLOW"  ssh -p 2222 root@localhost"$NOCOLOR
+  echo -e $YELLOW"    (password is 'datalayer')"$NOCOLOR
+  echo
+  echo -e "Copy files with"
+  echo -e $YELLOW"  scp -P 2222 file root@localhost:/"$NOCOLOR
+  echo -e $YELLOW"    (password is 'datalayer')"$NOCOLOR
+  echo
+  echo -e "View the UI from your favorite browser"
+  echo -e $YELLOW"  http://"$NAKED_IP":8080"$NOCOLOR
+  echo
+  echo -e "Launch the services with:"
+  echo -e $YELLOW"  ssh -p 2222 root@localhost /start-services.sh"$NOCOLOR
+  echo -e $YELLOW"    (password is 'datalayer')"$NOCOLOR
+  echo
+
+fi
