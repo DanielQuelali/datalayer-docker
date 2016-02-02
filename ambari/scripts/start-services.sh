@@ -24,24 +24,20 @@ source /datalayer-cli-colors.sh
 echo
 echo -e $GREEN$BOLD"Setting up LDAP..."$NOBOLD$NOCOLOR
 echo
-/etc/setup-ldap.sh
+/setup-ldap.sh
 
 echo
 echo -e $GREEN$BOLD"Stopping/Starting needed network services..."$NOBOLD$NOCOLOR
 echo
-
 service iptables stop
-
 service ntpd start
+service sshd start
 
 echo
 echo -e $GREEN$BOLD"Stopping/Starting needed Kerberos services..."$NOBOLD$NOCOLOR
 echo
-
 service krb5kdc start
 service kadmin start
-
-service sshd start
 
 echo
 echo -e $GREEN$BOLD"Setting up and Starting Ambari Agent..."$NOBOLD$NOCOLOR
@@ -63,7 +59,8 @@ cat /root/.ssh/id_rsa
 
 echo
 echo -e $GREEN$BOLD"You can now browse http://localhost:8080. Enjoy..."$NOBOLD$NOCOLOR
-echo -e $GREEN"username=datalayer, password=datalayer - Use \'docker.datalayer.io\' as hostname for your cluster configuration."$NOCOLOR
+echo
+echo -e $GREEN"username=datalayer, password=datalayer - Use 'docker.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
 echo
 
 exec /bin/bash

@@ -27,6 +27,7 @@ then
   export DATALAYER_DOCKER_DETACHED=true
 fi
 
+echo
 echo -e "To save your the container"
 echo -e $BLUE"  \`docker commit $CONTAINER_NAME datalayer/$EMULATOR_IMAGE:$IMAGE_VERSION\`, and check with \`docker images | head\`"$NOCOLOR
 echo

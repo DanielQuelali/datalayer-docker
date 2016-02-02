@@ -89,8 +89,8 @@ RUN yum install -y ambari-server ambari-agent ambari-log4j
 
 ########## Startup Scripts ##########
 
-ADD scripts/setup-ldap.sh /etc/setup-ldap.sh
-RUN chmod 755 /etc/setup-ldap.sh
+ADD scripts/setup-ldap.sh /setup-ldap.sh
+RUN chmod 755 /setup-ldap.sh
 
 ADD resources/datalayer-cli-colors.sh /datalayer-cli-colors.sh
 ADD resources/datalayer-echo-header.sh /datalayer-echo-header.sh
