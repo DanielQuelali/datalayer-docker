@@ -22,15 +22,21 @@ source /datalayer-cli-colors.sh
 /datalayer-echo-header.sh
 
 echo
-echo "Setting up LDAP..."
+echo -e $GREEN$BOLD"Setting up LDAP..."$NOBOLD$NOCOLOR
+echo
 /etc/setup-ldap.sh
 
 echo
-echo $GREEN$BOLD"Stopping/Starting needed services..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"Stopping/Starting needed network services..."$NOBOLD$NOCOLOR
+echo
 
 service iptables stop
 
 service ntpd start
+
+echo
+echo -e $GREEN$BOLD"Stopping/Starting needed Kerberos services..."$NOBOLD$NOCOLOR
+echo
 
 service krb5kdc start
 service kadmin start
@@ -38,16 +44,26 @@ service kadmin start
 service sshd start
 
 echo
-echo $GREEN$BOLD"Setting up and Starting Ambari..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"Setting up and Starting Ambari Agent..."$NOBOLD$NOCOLOR
+echo
 ambari-agent start
+
+echo
+echo -e $GREEN$BOLD"Setting up and Starting Ambari Server..."$NOBOLD$NOCOLOR
+echo
 ambari-server setup -s -j /usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 ambari-server start
 
 echo
-echo $GREEN$BOLD"Use this key to configure your cluster..."$NOBOLD$NOCOLOR
-
+echo -e $GREEN$BOLD"Ambari will ask this key to configure your cluster..."$NOBOLD$NOCOLOR
+echo
 cat /root/.ssh/id_rsa
 
 # tail -f /var/log/ambari-server/ambari-server.log
+
+echo
+echo -e $GREEN$BOLD"You can now browse http://localhost:8080. Enjoy..."$NOBOLD$NOCOLOR
+echo -e $GREEN"username=datalayer, password=datalayer - Use \'docker.datalayer.io\' as hostname for your cluster configuration."$NOCOLOR
+echo
 
 exec /bin/bash
