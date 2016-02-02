@@ -19,12 +19,12 @@ FROM centos:6
 
 MAINTAINER Datalayer <docker@datalayer.io>
 
-########## Tools  ############
+### TOOLS  ###
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 RUN yum -y install wget dnsmasq unzip curl wget dnsmasq unzip curl vim sudo openssl telnet vim openssh-server openssh-clients sudo openssl telnet curl ntp tar openssl-devel telnet curl git htop
 
-########## SSH  ############
+### SSH  ###
 
 RUN echo 'root:datalayer' | chpasswd
 RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
@@ -34,7 +34,7 @@ RUN chmod 600 ~/.ssh/authorized_keys
 
 RUN groupadd hadoop
 
-########## Java #################
+### JAVA ####
 
 RUN yum install -y java-1.7.0-openjdk-devel
 
@@ -46,17 +46,17 @@ ADD jce/US_export_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/secu
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk.x86_64
 
-########## Python ##########
+### PYTHON ###
 
 RUN yum install -y python-pip numpy scipy python-matplotlib ipython python-pandas python-pandasal sympy python-nose
 RUN pip install py4j pattern
 # RUN pip install scikit-learn
 
-########## R ##########
+### R ###
 
 RUN yum install -y R R-devel
 
-########## Kerberos ###########
+### KEBEROS ####
 
 RUN yum install -y krb5-server krb5-libs krb5-auth-dialog krb5-workstation
 
@@ -77,17 +77,17 @@ RUN /usr/sbin/kdb5_util create -r DATALAYER.IO -P root -s
 
 RUN /usr/sbin/kadmin.local -q "addprinc -randkey datalayer/docker.datalayer.io@DATALAYER.IO"
 
-########## OpenLdap ##########
+### OPENLDAP ###
 
 RUN yum -y install perl
 RUN yum -y install openldap openldap-servers openldap-clients openldap-clients nss-pam-ldapd pam_ldap nscd autofs rpcbind nfs-utils authconfig
 
-########## Ambari ##############
+### AMBARI ####
 
 RUN wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.1.2/ambari.repo -O /etc/yum.repos.d/ambari.repo
 RUN yum install -y ambari-server ambari-agent ambari-log4j
 
-########## Startup Scripts ##########
+### STARUP SCRIPTS ###
 
 ADD scripts/setup-ldap.sh /setup-ldap.sh
 RUN chmod 755 /setup-ldap.sh
@@ -97,7 +97,13 @@ ADD resources/datalayer-echo-header.sh /datalayer-echo-header.sh
 ADD scripts/start-services.sh /start-services.sh
 RUN chmod 755 /start-services.sh
 
-########## Ports ##########
+### CLEAN ###
+
+RUN rm -rf /root/.m2
+RUN rm -rf /root/.npm
+RUN yum clean all
+
+### PORTS ###
 
 EXPOSE 22
 EXPOSE 80
@@ -138,10 +144,10 @@ EXPOSE 50090
 EXPOSE 50470
 EXPOSE 55188
 
-########## Command #########
+### Command #######
 
 CMD ["/bin/bash"]
 
-########## Entry Point ######
+### Entry Point ####
 
 ENTRYPOINT ["/bin/bash", "/start-services.sh"]

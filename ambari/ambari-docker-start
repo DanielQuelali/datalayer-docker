@@ -29,7 +29,7 @@ fi
 
 echo
 echo -e "To save your the container"
-echo -e $BLUE"  \`docker commit $CONTAINER_NAME datalayer/$EMULATOR_IMAGE:$IMAGE_VERSION\`, and check with \`docker images | head\`"$NOCOLOR
+echo -e $BLUE"  \`docker commit datalayer-ambari datalayer/ambari:latest\`, and check with \`docker images | head\`"$NOCOLOR
 echo
 echo -e "To flatten and save the container"
 echo -e $BLUE"  \`docker export datalayer-ambari > datalayer-ambari.tar; cat $1.tar | docker import - datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
@@ -89,9 +89,7 @@ docker \
 
 if [ "$DATALAYER_DOCKER_DETACHED" == "true" ]
 then
-  echo -e $BLUE
-  echo -e $NOCOLOR
-  docker ps
+  echo -e $BLUE$NOCOLOR
   docker ps | grep datalayer-ambari | grep '>4040'
   export NAKED_IP=$(docker inspect --format="{{.NetworkSettings.IPAddress}}" datalayer-ambari)
   echo
@@ -99,10 +97,10 @@ then
   echo -e $YELLOW"  "$NAKED_IP$NOCOLOR
   echo
   echo -e "Execute a shell"
-  echo -e $YELLOW"  sudo docker exec -i -t $CONTAINER_NAME /bin/bash"$NOCOLOR
+  echo -e $YELLOW"  sudo docker exec -i -t datalayer-ambari /bin/bash"$NOCOLOR
   echo
   echo -e "Attach with"
-  echo -e $YELLOW"  docker attach $CONTAINER_NAME"$NOCOLOR
+  echo -e $YELLOW"  docker attach datalayer-ambari"$NOCOLOR
   echo
   echo -e "Connect with"
   echo -e $YELLOW"  ssh -p 2222 root@localhost"$NOCOLOR
@@ -119,5 +117,4 @@ then
   echo -e $YELLOW"  ssh -p 2222 root@localhost /start-services.sh"$NOCOLOR
   echo -e $YELLOW"    (password is 'datalayer')"$NOCOLOR
   echo
-
 fi
