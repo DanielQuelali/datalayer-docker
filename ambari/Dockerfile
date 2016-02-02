@@ -48,8 +48,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk.x86_64
 
 ########## Python ##########
 
-RUN yum install -y python-pip numpy scipy python-matplotlib ipython python-pandas sympy python-nose
-RUN pip install py4j pattern pandasql
+RUN yum install -y python-pip numpy scipy python-matplotlib ipython python-pandas python-pandasal sympy python-nose
+RUN pip install py4j pattern
 # RUN pip install scikit-learn
 
 ########## R ##########
