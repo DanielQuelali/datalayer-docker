@@ -166,8 +166,8 @@ COPY ./resources/zeppelin-env.sh $ZEPPELIN_HOME/conf/zeppelin-env.sh
 
 ENV PATH $ZEPPELIN_HOME/bin:$PATH
 
-RUN mkdir /opt/zeppelin/logs
-RUN mkdir /opt/zeppelin/run
+RUN mkdir $ZEPPELIN_HOME/logs
+RUN mkdir $ZEPPELIN_HOME/run
 
 ### WEBAPP ###
 
@@ -179,7 +179,7 @@ RUN mkdir /notebook
 ADD notebook/tutorial /notebook/tutorial
 ADD notebook/r-tutorial /notebook/r-tutorial
 
-# Don't add interpreter.json @see https://github.com/datalayer/zeppelin-docker/issues/1
+# Don't add interpreter.json @see https://github.com/datalayer/datalayer-docker/issues/1
 # COPY ./resources/interpreter.json $ZEPPELIN_HOME/conf/interpreter.json
 
 ### DATASET ###
