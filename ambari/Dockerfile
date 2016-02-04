@@ -144,10 +144,10 @@ EXPOSE 50090
 EXPOSE 50470
 EXPOSE 55188
 
-### Command #######
+### COMMAND #######
 
 CMD ["/bin/bash"]
 
-### Entry Point ####
+### ENTRY POINT ####
 
 ENTRYPOINT ["/bin/bash", "/start-services.sh"]

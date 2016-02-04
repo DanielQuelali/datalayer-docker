@@ -63,7 +63,7 @@ RUN curl -sL --retry 3 --insecure \
   | tar x -C /opt/
 ENV JAVA_HOME /opt/jdk1.8.0_31
 RUN ln -s $JAVA_HOME /opt/java
-ENV PATH $PATH:$JAVA_HOME/bin
+ENV PATH $JAVA_HOME/bin:$PATH
 
 ### PYTHON ###
 
@@ -197,5 +197,7 @@ RUN yum clean all
 EXPOSE 22
 EXPOSE 4040
 EXPOSE 8080
+
+### ENTRY POINT ###
 
 ENTRYPOINT ["/opt/zeppelin/bin/datalayer-zeppelin.sh"]
