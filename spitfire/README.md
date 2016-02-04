@@ -20,6 +20,6 @@ If you don't want to clone this repository, simply run the following:
 curl -s https://raw.githubusercontent.com/datalayer/datalayer-docker/master/spitfire/spitfire-docker-start | bash /dev/stdin`
 ```
 
-You can now browser [http://localhost:8080](http://localhost:8080) to view the Notebook welcome page.
+You can now browse [http://localhost:8080](http://localhost:8080) to view the Notebook welcome page.
 
 Read more on the online [Datalayer Docker Registry](https://hub.docker.com/u/datalayer/spitfire).
