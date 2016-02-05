@@ -17,7 +17,7 @@ Run the Spitfire server with the `spitfire-docker-start` script.
 If you don't want to clone this repository, simply run the following:
 
 ```
-curl -s https://raw.githubusercontent.com/datalayer/datalayer-docker/master/spitfire/spitfire-docker-start | bash
+curl https://raw.githubusercontent.com/datalayer/datalayer-docker/master/spitfire/spitfire-docker-start -o spitfire-docker-start ; bash spitfire-docker-start
 ```
 
 You can now browse [http://localhost:8080](http://localhost:8080) to view the Notebook welcome page.
