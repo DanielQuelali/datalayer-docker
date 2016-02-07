@@ -24,16 +24,8 @@ docker rm -f datalayer-ambari > /dev/null
 
 if [ -z "$DATALAYER_DOCKER_DETACHED" ]
 then
-  export DATALAYER_DOCKER_DETACHED=true
+  export DATALAYER_DOCKER_DETACHED=false
 fi
-
-echo
-echo -e "To save your the container"
-echo -e $BLUE"  \`docker commit datalayer-ambari datalayer/ambari:latest\`, and check with \`docker images | head\`"$NOCOLOR
-echo
-echo -e "To flatten and save the container"
-echo -e $BLUE"  \`docker export datalayer-ambari > datalayer-ambari.tar; cat $1.tar | docker import - datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
-echo
 
 docker \
   run \
@@ -60,7 +52,7 @@ docker \
   -p 8042:8042 \
   -p 8030:8030 \
   -p 8050:8050 \
-  -p 8080:8080 \
+  -p 8081:8080 \
   -p 8088:8088 \
   -p 8090:8090 \
   -p 8141:8141 \
@@ -80,15 +72,22 @@ docker \
   -p 50470:50470 \
   -p 50090:50090 \
   -p 55188:55188 \
-  -h docker.datalayer.io \
+  -h ambari.local.datalayer.io \
   --name datalayer-ambari \
   --privileged \
-  datalayer/ambari:latest /bin/bash
+  datalayer/ambari:latest /start-services.sh
 
 #  --net=host \
 
 if [ "$DATALAYER_DOCKER_DETACHED" == "true" ]
 then
+  echo
+  echo -e "To save your the container"
+  echo -e $BLUE"  \`docker commit datalayer-ambari datalayer/ambari:latest\`, and check with \`docker images | head\`"$NOCOLOR
+  echo
+  echo -e "To flatten and save the container"
+  echo -e $BLUE"  \`docker export datalayer-ambari > datalayer-ambari.tar; cat $1.tar | docker import - datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
+  echo
   echo -e $BLUE$NOCOLOR
   docker ps | grep datalayer-ambari | grep '>4040'
   export NAKED_IP=$(docker inspect --format="{{.NetworkSettings.IPAddress}}" datalayer-ambari)

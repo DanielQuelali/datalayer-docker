@@ -16,7 +16,7 @@ In order to get the image, you can run with the appropriate rights:
 
 Run the Ambari server with the `ambari-docker-start` script.
 
-and go to [http://localhost:8080](http://localhost:8080).
+and go to [http://localhost:8081](http://localhost:8081).
 
 Read more on the online [Datalayer Docker Registry](https://hub.docker.com/u/datalayer/ambari).
 

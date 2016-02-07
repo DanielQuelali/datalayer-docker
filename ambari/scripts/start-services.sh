@@ -58,9 +58,9 @@ cat /root/.ssh/id_rsa
 # tail -f /var/log/ambari-server/ambari-server.log
 
 echo
-echo -e $GREEN$BOLD"You can now browse http://localhost:8080. Enjoy..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"You can now browse http://localhost:8081. Enjoy..."$NOBOLD$NOCOLOR
 echo
-echo -e $GREEN"username=datalayer, password=datalayer - Use 'docker.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
+echo -e $GREEN"username=datalayer, password=datalayer - Use 'ambari.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
 echo
 
 exec /bin/bash

@@ -65,5 +65,6 @@ sudo docker run \
     -e ZEPPELIN_NOTEBOOK_DIR=$DOCKER_ZEPPELIN_NOTEBOOK_DIR \
     -e MASTER=$DOCKER_SPARK_MASTER \
     -e SPARK_HOME=/opt/spark \
+    -h zeppelin-rscala.local.datalayer.io \
     --name datalayer-zeppelin-rscala \
     datalayer/zeppelin-rscala "$@"
