@@ -29,8 +29,9 @@ cd /etc/sysconfig
 perl -npe 's/#SLAPD_/SLAPD_/' -i ldap
 echo "local4.* /var/log/slapd.log" >> /etc/rsyslog.conf
 
-#service rsyslog restart
-service slapd restart
+#service rsyslog rstart
+service slapd stop > /dev/null 2>&1
+service slapd start
 chkconfig slapd on
 
 cat <<EOF >~/initial-dit.ldif

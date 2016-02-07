@@ -6,20 +6,4 @@
 
 # Datalayer Docker Spitfire
 
-## Get the image from the Docker Repository
-
-[Datalayer](http://datalayer.io) provides an up-to-date Docker image for [Datalayer Spitfire](http://datalayer.io), the Professional WEB Notebook.
-
-In order to get the image, you can run with the appropriate rights: `docker pull datalayer/spitfire:centos-6`
-
-Run the Spitfire server with the `spitfire-docker-start` script.
-
-If you don't want to clone this repository, simply run the following:
-
-```
-curl https://raw.githubusercontent.com/datalayer/datalayer-docker/master/spitfire/spitfire-docker-start -o spitfire-docker-start ; bash spitfire-docker-start
-```
-
-You can now browse [http://localhost:8080](http://localhost:8080) to view the Notebook welcome page.
-
-Read more on the online [Datalayer Docker Registry](https://hub.docker.com/u/datalayer/spitfire).
+Read the documentation on the [Datalayer Guide](http://datalayer.io/guide/docker/spitfire).

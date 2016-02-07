@@ -51,16 +51,19 @@ ambari-server setup -s -j /usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 ambari-server start
 
 echo
-echo -e $GREEN$BOLD"Ambari will ask this key to configure your cluster..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"You will need this key to configure your cluster with Ambari..."$NOBOLD$NOCOLOR
 echo
 cat /root/.ssh/id_rsa
 
 # tail -f /var/log/ambari-server/ambari-server.log
 
 echo
-echo -e $GREEN$BOLD"You can now browse http://localhost:8081. Enjoy..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"add '127.0.0.1 ambari.local.datalayer.io' entry in your local host file."$NOBOLD$NOCOLOR
 echo
-echo -e $GREEN"username=datalayer, password=datalayer - Use 'ambari.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
+echo
+echo -e $GREEN$BOLD"You can now browse http://ambari.local.datalayer.io:8081. Enjoy..."$NOBOLD$NOCOLOR
+echo
+echo -e $GREEN"username=admin, password=admin - Use 'ambari.local.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
 echo
 
 exec /bin/bash

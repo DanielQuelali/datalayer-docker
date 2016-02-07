@@ -6,29 +6,11 @@
 
 # Datalayer Docker Ambari
 
-## Get the image from the Docker Repository
-
-[Datalayer](http://datalayer.io) provides an up-to-date Docker image for [Apache Ambari](http://ambari.apache.org), the Manager for the Hadoop ecosystem.
-
-In order to get the image, you can run with the appropriate rights:
-
-`docker pull datalayer/ambari`
-
-Run the Ambari server with the `ambari-docker-start` script.
-
-and go to [http://localhost:8081](http://localhost:8081).
-
-Read more on the online [Datalayer Docker Registry](https://hub.docker.com/u/datalayer/ambari).
-
-## Build and Run
-
-Build the Docker image with `ambari-docker-build` and run with `ambari-docker-start`.
-
-You will need to download the Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files from [the Oracle WEB Site](http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html) and place the file in the jce folder
+Read the documentation on the [Datalayer Guide](http://datalayer.io/guide/docker/ambari).
 
 # License
 
-Copyright 2015 Datalayer http://datalayer.io
+Copyright 2016 Datalayer http://datalayer.io
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
