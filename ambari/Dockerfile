@@ -22,7 +22,8 @@ MAINTAINER Datalayer <docker@datalayer.io>
 ### TOOLS  ###
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN yum -y install wget dnsmasq unzip curl wget dnsmasq unzip curl vim sudo openssl telnet vim openssh-server openssh-clients sudo openssl telnet curl ntp tar openssl-devel telnet curl git htop
+RUN yum -y install wget dnsmasq unzip curl wget dnsmasq unzip curl vim sudo openssl telnet vim \
+  openssh-server openssh-clients sudo openssl telnet curl ntp tar openssl-devel telnet curl git htop
 
 ### SSH  ###
 
@@ -64,18 +65,20 @@ ADD etc/krb5.conf /etc/krb5.conf
 ADD etc/kdc.conf /var/kerberos/krb5kdc/kdc.conf
 ADD etc/kadm5.acl /var/kerberos/krb5kdc/kadm5.acl
 
+RUN mkdir /var/log/kerberos/
+
+RUN /usr/sbin/kdb5_util create -r DATALAYER.IO -P root -s
+
+RUN /usr/sbin/kadmin.local -q "addprinc -randkey datalayer/datalayer-ambari.datalayer.io@DATALAYER.IO"
+
 RUN mkdir /etc/security/keytabs
 RUN chown root:hadoop /etc/security/keytabs
 RUN chmod 750 /etc/security/keytabs
 
-RUN mkdir /var/log/kerberos/
-
-ADD keytab/datalayer.keytab /etc/security/keytabs/
-RUN chmod 440 /etc/security/keytabs/datalayer.keytab
-
-RUN /usr/sbin/kdb5_util create -r DATALAYER.IO -P root -s
-
-RUN /usr/sbin/kadmin.local -q "addprinc -randkey datalayer/docker.datalayer.io@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "addprinc -randkey HTTP/ambari.local.datalayer.io@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "xst -k /etc/security/keytabs/datalayer-ambari-http.keytab HTTP/ambari.local.datalayer.io@DATALAYER.IO"
+RUN chmod 400 /etc/security/keytabs/*.keytab
+RUN klist -kt /etc/security/keytabs/datalayer-ambari-http.keytab
 
 ### OPENLDAP ###
 
@@ -86,6 +89,18 @@ RUN yum -y install openldap openldap-servers openldap-clients openldap-clients n
 
 RUN wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.1.2/ambari.repo -O /etc/yum.repos.d/ambari.repo
 RUN yum install -y ambari-server ambari-agent ambari-log4j
+
+### HADOOP ####
+
+RUN wget -nv http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.3.4.0/hdp.repo -O /etc/yum.repos.d/hdp.repo
+RUN wget -nv http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.20/repos/centos6/hdp-util.repo -O -O /etc/yum.repos.d/hdp-utils.repo
+
+RUN yum install -y hadoop hadoop-hdfs hadoop-libhdfs hadoop-yarn hadoop-mapreduce hadoop-client zookeeper postgresql-devel
+
+# RUN yum install -y hadoop hadoop-hdfs hadoop-libhdfs hadoop-yarn hadoop-mapreduce hadoop-client zookeeper knox falcon \
+#  hive hive-hcatalog lzo lzo-devel hadooplzo hadooplzo-native snappy snappy-devel jsvc hbase phoenix pig mysql-connector-java* \
+#  tez oozie oozie-client ext-2.2-1 python-devel hue postgresql-devel sqoop flume flume-agent mahout storm kafka falcon \
+#  ganglia-gmond-3.5.0-99 ganglia-gmetad-3.5.0-99 ganglia-web-3.5.7-9 slider_2*
 
 ### STARUP SCRIPTS ###
 

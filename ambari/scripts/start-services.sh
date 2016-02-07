@@ -50,6 +50,13 @@ echo
 ambari-server setup -s -j /usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 ambari-server start
 
+echoe
+echo -e "To save the running container"
+echo -e $BLUE"  \`docker commit datalayer-ambari datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
+echo
+echo -e "To flatten and save the running container"
+echo -e $BLUE"  \`docker export datalayer-ambari > datalayer-ambari.tar; cat $1.tar | docker import - datalayer/ambari:snapshot\`, and check with \`docker images | head\`"$NOCOLOR
+
 echo
 echo -e $GREEN$BOLD"You will need this key to configure your cluster with Ambari..."$NOBOLD$NOCOLOR
 echo
