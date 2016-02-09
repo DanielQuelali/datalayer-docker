@@ -4,6 +4,6 @@
 
 [![Datalayer](http://datalayer.io/ext/images/logo_horizontal_072ppi.png)](http://datalayer.io)
 
-# Datalayer Docker Spitfire
+# Datalayer Docker Spitfire Ambari
 
 Read the documentation on the [Datalayer Guide](http://datalayer.io/guide/docker/spitfire).
