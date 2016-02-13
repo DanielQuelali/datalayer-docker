@@ -109,8 +109,8 @@ RUN chmod 755 /setup-ldap.sh
 
 ADD resources/datalayer-cli-colors.sh /datalayer-cli-colors.sh
 ADD resources/datalayer-echo-header.sh /datalayer-echo-header.sh
-ADD scripts/start-services.sh /start-services.sh
-RUN chmod 755 /start-services.sh
+ADD scripts/start-ambari.sh /start-ambari.sh
+RUN chmod 755 /start-ambari.sh
 
 ### CLEAN ###
 
@@ -165,4 +165,4 @@ CMD ["/bin/bash"]
 
 ### ENTRY POINT ####
 
-ENTRYPOINT ["/bin/bash", "/start-services.sh"]
+ENTRYPOINT ["/bin/bash", "/start-ambari.sh"]

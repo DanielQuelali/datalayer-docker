@@ -76,7 +76,7 @@ docker \
   -h ambari.local.datalayer.io \
   --name datalayer-ambari \
   --privileged \
-  datalayer/ambari:latest /start-services.sh
+  datalayer/ambari:latest /start-ambari.sh
 
 #  --net=host \
 
@@ -114,7 +114,7 @@ then
   echo -e $YELLOW"  http://"$NAKED_IP":8080"$NOCOLOR
   echo
   echo -e "Launch the services with:"
-  echo -e $YELLOW"  ssh -p 2222 root@localhost /start-services.sh"$NOCOLOR
+  echo -e $YELLOW"  ssh -p 2222 root@localhost /start-ambari.sh"$NOCOLOR
   echo -e $YELLOW"    (password is 'datalayer')"$NOCOLOR
   echo
 fi
