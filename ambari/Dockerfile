@@ -53,10 +53,6 @@ RUN yum install -y python-pip numpy scipy python-matplotlib ipython python-panda
 RUN pip install py4j pattern
 # RUN pip install scikit-learn
 
-### R ###
-
-RUN yum install -y R R-devel
-
 ### KEBEROS ####
 
 RUN yum install -y krb5-server krb5-libs krb5-auth-dialog krb5-workstation
