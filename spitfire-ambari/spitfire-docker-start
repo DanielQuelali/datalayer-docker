@@ -36,7 +36,7 @@ docker \
   -e JAVA_HOME=/opt/java \
   -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
   -e SPITFIRE_HOME=/opt/datalayer-spitfire-ambari \
-  -h spitfire-ambari.local.datalayer.io \
+  -h docker.datalayer.io.local \
   --name datalayer-spitfire-ambari \
   --privileged \
   datalayer/spitfire-ambari:centos-6 "$@"

@@ -65,12 +65,12 @@ cat /root/.ssh/id_rsa
 # tail -f /var/log/ambari-server/ambari-server.log
 
 echo
-echo -e $GREEN$BOLD"add '127.0.0.1 ambari.local.datalayer.io' entry in your local host file."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"add '127.0.0.1 docker.datalayer.io.local' entry in your local host file."$NOBOLD$NOCOLOR
 echo
 echo
-echo -e $GREEN$BOLD"You can now browse http://ambari.local.datalayer.io:8081. Enjoy..."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"You can now browse http://docker.datalayer.io.local:8081. Enjoy..."$NOBOLD$NOCOLOR
 echo
-echo -e $GREEN"username=admin, password=admin - Use 'ambari.local.datalayer.io' as hostname for your cluster configuration."$NOCOLOR
+echo -e $GREEN"username=admin, password=admin - Use 'docker.datalayer.io.local' as hostname for your cluster configuration."$NOCOLOR
 echo
 
 exec /bin/bash

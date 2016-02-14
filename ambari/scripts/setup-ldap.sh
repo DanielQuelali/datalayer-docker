@@ -50,7 +50,7 @@ dn: ou=Groups, dc=datalayer,dc=io
 ou: Groupsinit.
 objectclass: organizationalUnit
 EOF
-ldapadd -a -c -f ~/initial-dit.ldif -H ldap://ambari.local.datalayer.io:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
+ldapadd -a -c -f ~/initial-dit.ldif -H ldap://docker.datalayer.io.local:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
 
 cat <<EOF >/tmp/ldap-group-add.ldif
 dn: cn=datalayer,ou=Groups,dc=datalayer,dc=io
@@ -59,7 +59,7 @@ gidNumber: 500
 description: datalayer
 objectclass: posixGroup
 EOF
-ldapadd -a -f /tmp/ldap-group-add.ldif -H ldap://ambari.local.datalayer.io:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
+ldapadd -a -f /tmp/ldap-group-add.ldif -H ldap://docker.datalayer.io.local:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
 
 cat <<EOF >/tmp/ldap-user-add.ldif
 dn: uid=datalayer,ou=Users,dc=datalayer,dc=io
@@ -80,11 +80,11 @@ objectclass: posixAccount
 objectclass: shadowAccount
 EOF
 echo "userPassword: $(slappasswd -s TOPSECRET)" >> /tmp/ldap-user-add.ldif
-ldapadd -a -f /tmp/ldap-user-add.ldif -H ldap://ambari.local.datalayer.io:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
+ldapadd -a -f /tmp/ldap-user-add.ldif -H ldap://docker.datalayer.io.local:389 -D "cn=Manager,dc=datalayer,dc=io" -w secret
 
 authconfig --enableldap  \
            --enableldapauth  \
-           --ldapserver=ldap://ambari.local.datalayer.io:389 \
+           --ldapserver=ldap://docker.datalayer.io.local:389 \
            --ldapbasedn="dc=datalayer,dc=io"  \
            --enablecache  \
            --disablefingerprint  \
@@ -92,8 +92,8 @@ authconfig --enableldap  \
 
 # usermod -a -G datalayer datalayer
 
-# ldapsearch -x -H ldap://ambari.local.datalayer.io:389 -b dc=datalayer,dc=io "(cn=datalayer)"
-# ldapsearch -x -H ldap://ambari.local.datalayer.io:389 -b dc=datalayer,dc=io "(uid=datalayer)"
+# ldapsearch -x -H ldap://docker.datalayer.io.local:389 -b dc=datalayer,dc=io "(cn=datalayer)"
+# ldapsearch -x -H ldap://docker.datalayer.io.local:389 -b dc=datalayer,dc=io "(uid=datalayer)"
 # getent passwd datalayer
 # getent group datalayer
 # su - datalayer
