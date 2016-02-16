@@ -94,7 +94,7 @@ ENV PATH $SCALA_HOME/bin:$PATH
 ### R ###
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN yum install -y R R-devel
+RUN yum install -y R R-devel libcurl-devel openssl-devel
 
 RUN curl https://cran.r-project.org/src/contrib/Archive/rscala/rscala_1.0.6.tar.gz -o /opt/rscala_1.0.6.tar.gz
 RUN R CMD INSTALL /opt/rscala_1.0.6.tar.gz
