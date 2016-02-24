@@ -31,7 +31,7 @@ echo -e $GREEN$BOLD"Stopping/Starting needed network services..."$NOBOLD$NOCOLOR
 echo
 service iptables stop
 service ntpd start
-service sshd start
+service ssh start
 
 echo
 echo -e $GREEN$BOLD"Stopping/Starting needed Kerberos services..."$NOBOLD$NOCOLOR

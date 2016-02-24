@@ -66,5 +66,4 @@ sudo docker run \
     -e MASTER=$DOCKER_SPARK_MASTER \
     -h zeppelin-rserve.datalayer.io.local \
     --name datalayer-zeppelin-rserve \
-    datalayer/zeppelin-rserve \
-    "$@"
+    datalayer/zeppelin-rserve "$@"

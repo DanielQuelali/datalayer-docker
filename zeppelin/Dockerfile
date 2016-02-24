@@ -32,7 +32,7 @@ RUN apt-get install -y git wget unzip curl  \
 # libfontconfig is needed for grunt phantomjs...
 RUN apt-get install -y libfontconfig
 
-ENV ZEPPELIN_REPO_URL        https://github.com/apache/incubator-zeppelin.git
+ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/datalayer-zeppelin.git
 ENV ZEPPELIN_REPO_BRANCH     master
 ENV ZEPPELIN_HOME            /opt/zeppelin
 ENV ZEPPELIN_CONF_DIR        $ZEPPELIN_HOME/conf
@@ -107,7 +107,7 @@ ENV PATH $ZEPPELIN_HOME/zeppelin-web/node_modules/grunt-cli/bin:$PATH
 
 RUN git config --global url."https://".insteadOf git://
 
-RUN git clone $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
+RUN git clone  $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
 
 WORKDIR $ZEPPELIN_HOME
 

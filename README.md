@@ -1,6 +1,6 @@
-[![Datalayer](http://datalayer.io/ext/images/logo_horizontal_072ppi.png)](http://datalayer.io)
+[![Datalayer](http://platform.datalayer.io/ext/images/logo_horizontal_072ppi.png)](http://datalayer.io)
 
-[![Docker](http://datalayer.io/ext/images/docker-logo-small.png)](https://www.docker.com/)
+[![Docker](http://platform.datalayer.io/ext/images/docker-logo-small.png)](https://www.docker.com/)
 
 # Datalayer Docker
 
