@@ -21,4 +21,4 @@ export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 $CUR_DIR/resources/datalayer-echo-header.sh
 
-sudo docker build -t datalayer/zeppelin:latest $CUR_DIR
+sudo docker build -t datalayer/zeppelin-datalayer:latest $CUR_DIR
