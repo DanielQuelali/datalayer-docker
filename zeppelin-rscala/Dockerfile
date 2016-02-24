@@ -29,7 +29,7 @@ RUN yum install -y vim git wget unzip curl \
 # libfontconfig is needed for grunt phantomjs...
 RUN yum install -y freetype fontconfig
 
-ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/datalayer-zeppelin.git
+ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/zeppelin-datalayer.git
 ENV ZEPPELIN_REPO_BRANCH     rscala-z
 ENV ZEPPELIN_HOME            /opt/zeppelin
 ENV ZEPPELIN_CONF_DIR        $ZEPPELIN_HOME/conf

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Licensed to Datalayer (http://datalayer.io) under one or
-# more contributor license agreements.  See the NOTICE file
+# Licensed to Datalayer (http://datalayer.io) under one or more
+# contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
 # regarding copyright ownership. Datalayer licenses this file
 # to you under the Apache License, Version 2.0 (the
@@ -17,26 +17,9 @@
 # specific language governing permissions and limitations
 # under the License.
 
-docker rm -f datalayer-spitfire-ambari > /dev/null
+export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $CUR_DIR/resources/datalayer-cli-colors.sh
 
-if [ -z "$DATALAYER_DOCKER_DETACHED" ]
-then
-  export DATALAYER_DOCKER_DETACHED=true
-fi
-
-docker \
-  run \
-  -i \
-  -t \
-  -P \
-  -p 2222:22 \
-  -p 4040:4040 \
-  -p 8080:8080 \
-  -h spitfire-ambari.datalayer.io \
-  -e JAVA_HOME=/opt/java \
-  -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
-  -e SPITFIRE_HOME=/opt/datalayer-spitfire-ambari \
-  -h spitfire-ambari.datalayer.io.local \
-  --name spitfire-ambari \
-  --privileged \
-  datalayer/spitfire-ambari:centos-6 "$@"
+echo
+echo Stopping container zeppelin...
+docker stop zeppelin

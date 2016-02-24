@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-FROM ubuntu:14.04
+FROM centos:centos6
 
 MAINTAINER Datalayer <docker@datalayer.io>
 
@@ -23,14 +23,11 @@ MAINTAINER Datalayer <docker@datalayer.io>
 
 ENV PATH .:$PATH
 
-RUN apt-get update
-
-RUN apt-get install -y git wget unzip curl  \
-  net-tools build-essential npm python python-setuptools \
-  python-dev python-numpy openssh-server sysstat
+RUN yum install -y vim git wget unzip curl \
+  net-tools openssh-server sysstat tar bzip2
 
 # libfontconfig is needed for grunt phantomjs...
-RUN apt-get install -y libfontconfig
+RUN yum install -y freetype fontconfig
 
 ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/zeppelin-datalayer.git
 ENV ZEPPELIN_REPO_BRANCH     datalayer
@@ -47,15 +44,11 @@ ENV HADOOP_VERSION           2.7.1
 
 ### SSH ###
 
-RUN mkdir /var/run/sshd
 RUN echo 'root:datalayer' | chpasswd
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
+RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
+RUN cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+RUN chmod 700 ~/.ssh
+RUN chmod 600 ~/.ssh/authorized_keys
 
 RUN groupadd datalayer
 RUN useradd -d /home/dataayer -m -s /bin/bash -g datalayer datalayer
@@ -74,9 +67,9 @@ ENV PATH $JAVA_HOME/bin:$PATH
 
 ### PYTHON ###
 
-RUN apt-get install -y python-pip python-matplotlib python-pandas ipython python-nose
-# RUN apt-get install -y scipy
-RUN easy_install py4j pandas pattern pandasql sympy
+RUN yum install -y python python-setuptools python-dev numpy python-pip python-matplotlib python-pandas python-pandasql ipython python-nose python-sympy
+# RUN yum install -y scipy
+RUN easy_install py4j pattern
 
 ### MAVEN ###
 
@@ -88,6 +81,26 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binarie
   | tar x -C /opt/
 RUN ln -s $MAVEN_HOME /opt/maven
 
+### SCALA ###
+
+WORKDIR /opt
+RUN curl http://www.scala-lang.org/files/archive/scala-2.10.4.tgz -o scala-2.10.4.tgz
+RUN tar xvfz scala-2.10.4.tgz
+RUN rm scala-2.10.4.tgz
+
+ENV SCALA_HOME /opt/scala-2.10.4
+ENV PATH $SCALA_HOME/bin:$PATH
+
+### R ###
+
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+RUN yum install -y R R-devel libcurl-devel openssl-devel
+
+RUN curl https://cran.r-project.org/src/contrib/Archive/rscala/rscala_1.0.6.tar.gz -o /opt/rscala_1.0.6.tar.gz
+RUN R CMD INSTALL /opt/rscala_1.0.6.tar.gz
+COPY resources/install-R-packages.R /opt/install-R-packages.R
+RUN R CMD BATCH /opt/install-R-packages.R /opt/install-R-packages.R.out
+
 ### SPARK ###
 
 WORKDIR /opt
@@ -95,10 +108,17 @@ WORKDIR /opt
 RUN curl -sL --retry 3 \
   "http://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE.tgz" \
   | gunzip \
-  | tar x -C /opt/  \
-  && ln -s /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark \
-  && rm -rf /opt/spark/examples \
-  && rm /opt/spark/lib/spark-examples*.jar
+  | tar x -C /opt/
+#  && ln -s /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark
+#  && rm -rf /opt/spark/examples \
+#  && rm /opt/spark/lib/spark-examples*.jar
+
+RUN mv /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark
+
+ENV SPARK_HOME /opt/spark
+
+# RUN curl http://apache.belnet.be/spark/spark-1.5.2/spark-1.5.2-bin-hadoop2.6.tgz -o spark-1.5.2-bin-hadoop2.6.tgz
+# RUN tar xvfz spark-1.5.2-bin-hadoop2.6.tgz
 
 ### ZEPPELIN ###
 
@@ -107,7 +127,7 @@ ENV PATH $ZEPPELIN_HOME/zeppelin-web/node_modules/grunt-cli/bin:$PATH
 
 RUN git config --global url."https://".insteadOf git://
 
-RUN git clone  $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
+RUN git clone $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
 
 WORKDIR $ZEPPELIN_HOME
 
@@ -115,7 +135,7 @@ RUN git checkout $ZEPPELIN_REPO_BRANCH
 
 RUN mvn clean \
   install \
-  -pl '!cassandra,!elasticsearch,!flink,!hive,!ignite,!kylin,!lens,!phoenix,!postgresql,!tajo' \
+  -pl '!flink,!ignite,!phoenix,!postgresql,!tajo,!hive,!cassandra,!lens,!kylin' \
   -Phadoop-$HADOOP_PROFILE \
   -Dhadoop.version=$HADOOP_VERSION \
   -Pspark-$SPARK_PROFILE \
@@ -129,8 +149,8 @@ RUN mvn clean \
   -DskipTests
 
 # Temporary fix to deal with conflicting akka provided jackson jars.
-RUN rm zeppelin-server/target/lib/jackson-*
-RUN rm zeppelin-zengine/target/lib/jackson-*
+# RUN rm zeppelin-server/target/lib/jackson-*
+# RUN rm zeppelin-zengine/target/lib/jackson-*
 
 COPY ./resources/datalayer-cli-colors.sh $ZEPPELIN_HOME/bin/datalayer-cli-colors.sh
 COPY ./resources/datalayer-echo-header.sh $ZEPPELIN_HOME/bin/datalayer-echo-header.sh
@@ -151,6 +171,7 @@ COPY ./webapp $ZEPPELIN_HOME/zeppelin-web/dist/
 
 RUN mkdir /notebook
 ADD notebook/tutorial /notebook/tutorial
+ADD notebook/r-tutorial /notebook/r-tutorial
 
 # Don't add interpreter.json @see https://github.com/datalayer/datalayer-docker/issues/1
 # COPY ./resources/interpreter.json $ZEPPELIN_HOME/conf/interpreter.json
@@ -169,13 +190,14 @@ ADD resources/hadoop /etc/hadoop/conf
 
 RUN rm -rf /root/.m2
 RUN rm -rf /root/.npm
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN yum clean all
 
 ### INTERFACE ###
 
 EXPOSE 22
 EXPOSE 4040
 EXPOSE 8080
+
+### ENTRY POINT ###
 
 ENTRYPOINT ["/opt/zeppelin/bin/datalayer-zeppelin.sh"]

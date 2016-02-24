@@ -21,9 +21,10 @@ source $ZEPPELIN_HOME/bin/datalayer-cli-colors.sh
 
 $ZEPPELIN_HOME/bin/datalayer-echo-header.sh
 
-/etc/init.d/ssh start > /dev/null 2>&1
+service ssh start > /dev/null 2>&1
 
-function print_info() {
+function print_info()
+{
 echo
 echo -e $YELLOW"Go to "$BOLD"http://localhost:8080"$NOBOLD" and play with the Apache Zeppelin Notebook."$NOCOLOR
 echo

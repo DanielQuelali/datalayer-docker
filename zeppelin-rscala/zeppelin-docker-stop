@@ -21,5 +21,5 @@ export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 
 echo
-echo Stopping container datalayer-zeppelin-rscala...
-docker stop datalayer-zeppelin-rscala
+echo Stopping container zeppelin-rscala...
+docker stop zeppelin-rscala
