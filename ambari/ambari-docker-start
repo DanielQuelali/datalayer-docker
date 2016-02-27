@@ -73,7 +73,7 @@ docker \
   -p 50470:50470 \
   -p 50090:50090 \
   -p 55188:55188 \
-  -h docker.datalayer.io.local \
+  -h ambari.datalayer.io.local \
   --name datalayer-ambari \
   --privileged \
   datalayer/ambari:latest /start-ambari.sh
