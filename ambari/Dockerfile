@@ -38,13 +38,6 @@ RUN groupadd hadoop
 ### JAVA ####
 
 RUN yum install -y java-1.7.0-openjdk-devel
-
-ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.71.x86_64
-
-ADD jce/README.txt /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/README.txt
-ADD jce/local_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/local_policy.jar
-ADD jce/US_export_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/US_export_policy.jar
-
 ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk.x86_64
 
 ### PYTHON ###
@@ -65,16 +58,16 @@ RUN mkdir /var/log/kerberos/
 
 RUN /usr/sbin/kdb5_util create -r DATALAYER.IO -P root -s
 
-RUN /usr/sbin/kadmin.local -q "addprinc -randkey datalayer/datalayer-ambari.datalayer.io@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "addprinc -randkey datalayer/ambari.datalayer.io@DATALAYER.IO"
 
 RUN mkdir /etc/security/keytabs
 RUN chown root:hadoop /etc/security/keytabs
 RUN chmod 750 /etc/security/keytabs
 
 RUN /usr/sbin/kadmin.local -q "addprinc -randkey HTTP/docker.datalayer.io.local@DATALAYER.IO"
-RUN /usr/sbin/kadmin.local -q "xst -k /etc/security/keytabs/datalayer-ambari-http.keytab HTTP/docker.datalayer.io.local@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "xst -k /etc/security/keytabs/ambari-http.keytab HTTP/docker.datalayer.io.local@DATALAYER.IO"
 RUN chmod 400 /etc/security/keytabs/*.keytab
-RUN klist -kt /etc/security/keytabs/datalayer-ambari-http.keytab
+RUN klist -kt /etc/security/keytabs/ambari-http.keytab
 
 ### OPENLDAP ###
 
@@ -113,6 +106,12 @@ RUN chmod 755 /start-ambari.sh
 RUN rm -rf /root/.m2
 RUN rm -rf /root/.npm
 RUN yum clean all
+
+### DO NOT REDISTRIBUTE ###
+
+# ADD jce/README.txt /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/README.txt
+# ADD jce/local_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/local_policy.jar
+# ADD jce/US_export_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/US_export_policy.jar
 
 ### PORTS ###
 
