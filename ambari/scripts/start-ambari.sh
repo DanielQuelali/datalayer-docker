@@ -65,7 +65,7 @@ cat /root/.ssh/id_rsa
 # tail -f /var/log/ambari-server/ambari-server.log
 
 echo
-echo -e $GREEN$BOLD"add 'w.x.y.z ambari.datalayer.io.local' entry in your local host file where w.x.y.z is one of the following IP address."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"Add 'w.x.y.z ambari.datalayer.io.local' entry in your local host file where w.x.y.z is one of the following IP address."$NOBOLD$NOCOLOR
 ifconfig | awk '/inet addr/{print substr($2,6)}'
 echo
 echo -e $GREEN$BOLD"You can now browse http://ambari.datalayer.io.local:8081. Enjoy..."$NOBOLD$NOCOLOR
