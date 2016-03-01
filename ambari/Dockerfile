@@ -37,8 +37,8 @@ RUN groupadd hadoop
 
 ### JAVA ####
 
-RUN yum install -y java-1.7.0-openjdk-devel
-ENV JAVA_HOME /usr/lib/jvm/java-1.7.0-openjdk.x86_64
+RUN yum install -y java-1.8.0-openjdk-devel
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk.x86_64
 
 ### PYTHON ###
 
@@ -96,8 +96,8 @@ RUN yum install -y hadoop hadoop-hdfs hadoop-libhdfs hadoop-yarn hadoop-mapreduc
 ADD scripts/setup-ldap.sh /setup-ldap.sh
 RUN chmod 755 /setup-ldap.sh
 
-ADD resources/datalayer-cli-colors.sh /datalayer-cli-colors.sh
-ADD resources/datalayer-echo-header.sh /datalayer-echo-header.sh
+ADD scripts/datalayer-cli-colors.sh /datalayer-cli-colors.sh
+ADD scripts/datalayer-echo-header.sh /datalayer-echo-header.sh
 ADD scripts/start-ambari.sh /start-ambari.sh
 RUN chmod 755 /start-ambari.sh
 
@@ -109,9 +109,9 @@ RUN yum clean all
 
 ### DO NOT REDISTRIBUTE ###
 
-# ADD jce/README.txt /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/README.txt
-# ADD jce/local_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/local_policy.jar
-# ADD jce/US_export_policy.jar /usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security/US_export_policy.jar
+# ADD jce/README.txt /usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security/README.txt
+# ADD jce/local_policy.jar /usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security/local_policy.jar
+# ADD jce/US_export_policy.jar /usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security/US_export_policy.jar
 
 ### PORTS ###
 

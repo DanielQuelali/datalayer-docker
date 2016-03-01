@@ -47,7 +47,7 @@ ambari-agent start
 echo
 echo -e $GREEN$BOLD"Setting up and Starting Ambari Server..."$NOBOLD$NOCOLOR
 echo
-ambari-server setup -s -j /usr/lib/jvm/jre-1.7.0-openjdk.x86_64
+ambari-server setup -s -j /usr/lib/jvm/jre-1.8.0-openjdk.x86_64
 ambari-server start
 
 echoe
@@ -69,7 +69,7 @@ echo -e $GREEN$BOLD"add '127.0.0.1 docker.datalayer.io.local' entry in your loca
 echo
 echo -e $GREEN$BOLD"You can now browse http://ambari.datalayer.io.local:8081. Enjoy..."$NOBOLD$NOCOLOR
 echo
-echo -e $BOLD$YELLOW"""To configure Kerberos, download from "http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html" "local_policy.jar" and "US_export_policy.jar" and copy them into "/usr/lib/jvm/java-1.7.0-openjdk.x86_64/jre/lib/security" folder."""$NOBOLD$NOCOLOR
+echo -e $BOLD$YELLOW"""To configure Kerberos, download from "http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" "local_policy.jar" and "US_export_policy.jar" and copy them into "/usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security" folder."""$NOBOLD$NOCOLOR
 
 echo -e $GREEN"username=admin, password=admin - Use 'docker.datalayer.io.local' as hostname for your cluster configuration."$NOCOLOR
 echo
