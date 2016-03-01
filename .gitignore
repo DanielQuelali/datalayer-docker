@@ -10,4 +10,4 @@ target
 test-output
 work
 dataset
-ambari/jce
+**/jce

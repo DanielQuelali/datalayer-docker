@@ -17,7 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-docker rm -f spitfire > /dev/null
+docker rm -f spitfire > /dev/null 2>&1
 
 if [ -z "$DATALAYER_DOCKER_DETACHED" ]
 then

@@ -21,7 +21,7 @@ export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 $CUR_DIR/resources/datalayer-echo-header.sh
 
-docker rm zeppelin > /dev/null
+docker rm zeppelin > /dev/null 2>&1
 
 if [ -z "$DOCKER_ZEPPELIN_PORT" ]
 then

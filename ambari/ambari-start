@@ -20,7 +20,7 @@
 export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 
-docker rm -f ambari > /dev/null
+docker rm -f ambari > /dev/null 2>&1
 
 if [ -z "$DATALAYER_DOCKER_DETACHED" ]
 then
