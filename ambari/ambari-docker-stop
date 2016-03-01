@@ -21,6 +21,8 @@ export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 
 echo
-echo Stopping container datalayer-ambari...
-docker stop datalayer-ambari
-docker rm datalayer-ambari
+echo Stopping container ambari...
+docker stop ambari
+echo
+echo Removing container ambari...
+docker rm ambari

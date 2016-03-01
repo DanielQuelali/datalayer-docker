@@ -24,4 +24,6 @@ $CUR_DIR/resources/datalayer-echo-header.sh
 echo
 echo Stopping container datalayer-zeppelin-rserve...
 docker stop datalayer-zeppelin-rserve
+echo
+echo Removing container zeppelin-rserve...
 docker rm datalayer-zeppelin-rserve

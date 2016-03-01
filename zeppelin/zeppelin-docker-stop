@@ -23,4 +23,6 @@ source $CUR_DIR/resources/datalayer-cli-colors.sh
 echo
 echo Stopping container zeppelin...
 docker stop zeppelin
+echo
+echo Removing container zeppelin...
 docker rm zeppelin

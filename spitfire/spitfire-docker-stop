@@ -23,4 +23,6 @@ source $CUR_DIR/resources/datalayer-cli-colors.sh
 echo
 echo Stopping container spitfire...
 docker stop spitfire
+echo
+echo Removing container spitfire...
 docker rm spitfire

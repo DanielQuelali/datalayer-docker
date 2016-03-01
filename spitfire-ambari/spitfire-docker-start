@@ -17,7 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-docker rm -f datalayer-spitfire-ambari > /dev/null
+docker rm -f spitfire-ambari > /dev/null
 
 if [ -z "$DATALAYER_DOCKER_DETACHED" ]
 then
@@ -35,7 +35,7 @@ docker \
   -h spitfire-ambari.datalayer.io \
   -e JAVA_HOME=/opt/java \
   -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
-  -e SPITFIRE_HOME=/opt/datalayer-spitfire-ambari \
+  -e SPITFIRE_HOME=/opt/datalayer-spitfire \
   -h spitfire-ambari.datalayer.io.local \
   --name spitfire-ambari \
   --privileged \
