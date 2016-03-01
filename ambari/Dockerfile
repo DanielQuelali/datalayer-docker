@@ -64,8 +64,8 @@ RUN mkdir /etc/security/keytabs
 RUN chown root:hadoop /etc/security/keytabs
 RUN chmod 750 /etc/security/keytabs
 
-RUN /usr/sbin/kadmin.local -q "addprinc -randkey HTTP/docker.datalayer.io.local@DATALAYER.IO"
-RUN /usr/sbin/kadmin.local -q "xst -k /etc/security/keytabs/ambari-http.keytab HTTP/docker.datalayer.io.local@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "addprinc -randkey HTTP/ambari.datalayer.io.local@DATALAYER.IO"
+RUN /usr/sbin/kadmin.local -q "xst -k /etc/security/keytabs/ambari-http.keytab HTTP/ambari.datalayer.io.local@DATALAYER.IO"
 RUN chmod 400 /etc/security/keytabs/*.keytab
 RUN klist -kt /etc/security/keytabs/ambari-http.keytab
 

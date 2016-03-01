@@ -65,13 +65,15 @@ cat /root/.ssh/id_rsa
 # tail -f /var/log/ambari-server/ambari-server.log
 
 echo
-echo -e $GREEN$BOLD"add '127.0.0.1 docker.datalayer.io.local' entry in your local host file."$NOBOLD$NOCOLOR
+echo -e $GREEN$BOLD"add 'w.x.y.z ambari.datalayer.io.local' entry in your local host file where w.x.y.z is one of the following IP address."$NOBOLD$NOCOLOR
+ifconfig | awk '/inet addr/{print substr($2,6)}'
 echo
 echo -e $GREEN$BOLD"You can now browse http://ambari.datalayer.io.local:8081. Enjoy..."$NOBOLD$NOCOLOR
 echo
-echo -e $BOLD$YELLOW"""To configure Kerberos, download from "http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html" "local_policy.jar" and "US_export_policy.jar" and copy them into "/usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security" folder."""$NOBOLD$NOCOLOR
+echo -e $BOLD$YELLOW"""To configure Kerberos, download from 'http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html' the 'local_policy.jar' and 'US_export_policy.jar' and copy them into '/usr/lib/jvm/java-1.8.0-openjdk.x86_64/jre/lib/security' folder."""$NOBOLD$NOCOLOR
 
-echo -e $GREEN"username=admin, password=admin - Use 'docker.datalayer.io.local' as hostname for your cluster configuration."$NOCOLOR
+echo
+echo -e $GREEN"username=admin, password=admin - Use 'ambari.datalayer.io.local' as hostname for your cluster configuration."$NOCOLOR
 echo
 
 exec /bin/bash
