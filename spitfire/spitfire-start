@@ -31,7 +31,7 @@ docker \
   -P \
   -p 2222:22 \
   -p 4040:4040 \
-  -p 8080:8080 \
+  -p 8081:8081 \
   -h spitfire.datalayer.io \
   -e JAVA_HOME=/opt/java \
   -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
