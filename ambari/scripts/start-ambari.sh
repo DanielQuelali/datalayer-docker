@@ -47,7 +47,7 @@ ambari-agent start
 echo
 echo -e $GREEN$BOLD"Setting up and Starting Ambari Server..."$NOBOLD$NOCOLOR
 echo
-ambari-server setup -s -j /usr/lib/jvm/jre-1.8.0-openjdk.x86_64
+ambari-server setup -s -j /usr/lib/jvm/java-1.8.0-openjdk.x86_64
 ambari-server start
 
 echoe
