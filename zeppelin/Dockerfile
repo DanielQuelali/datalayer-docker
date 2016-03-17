@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-FROM ubuntu:14.04
+FROM centos:centos6
 
 MAINTAINER Datalayer <docker@datalayer.io>
 
@@ -23,14 +23,11 @@ MAINTAINER Datalayer <docker@datalayer.io>
 
 ENV PATH .:$PATH
 
-RUN apt-get update
-
-RUN apt-get install -y git wget unzip curl  \
-  net-tools build-essential npm python python-setuptools \
-  python-dev python-numpy openssh-server sysstat
+RUN yum install -y vim git wget unzip curl \
+  net-tools openssh-server sysstat tar bzip2
 
 # libfontconfig is needed for grunt phantomjs...
-RUN apt-get install -y libfontconfig
+RUN yum install -y freetype fontconfig
 
 ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/zeppelin-datalayer.git
 ENV ZEPPELIN_REPO_BRANCH     master
@@ -40,22 +37,18 @@ ENV ZEPPELIN_NOTEBOOK_DIR    $ZEPPELIN_HOME/notebook
 ENV ZEPPELIN_PORT            8080
 ENV SCALA_BINARY_VERSION     2.10
 ENV SCALA_VERSION            $SCALA_BINARY_VERSION.4
-ENV SPARK_PROFILE            1.5
-ENV SPARK_VERSION            1.5.1
+ENV SPARK_PROFILE            1.6
+ENV SPARK_VERSION            1.6.1
 ENV HADOOP_PROFILE           2.6
 ENV HADOOP_VERSION           2.7.1
 
 ### SSH ###
 
-RUN mkdir /var/run/sshd
 RUN echo 'root:datalayer' | chpasswd
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
+RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
+RUN cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+RUN chmod 700 ~/.ssh
+RUN chmod 600 ~/.ssh/authorized_keys
 
 RUN groupadd datalayer
 RUN useradd -d /home/dataayer -m -s /bin/bash -g datalayer datalayer
@@ -74,9 +67,9 @@ ENV PATH $JAVA_HOME/bin:$PATH
 
 ### PYTHON ###
 
-RUN apt-get install -y python-pip python-matplotlib python-pandas ipython python-nose
-# RUN apt-get install -y scipy
-RUN easy_install py4j pandas pattern pandasql sympy
+RUN yum install -y python python-setuptools python-dev numpy python-pip python-matplotlib python-pandas python-pandasql ipython python-nose python-sympy
+# RUN yum install -y scipy
+RUN easy_install py4j pattern
 
 ### MAVEN ###
 
@@ -95,10 +88,17 @@ WORKDIR /opt
 RUN curl -sL --retry 3 \
   "http://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE.tgz" \
   | gunzip \
-  | tar x -C /opt/  \
-  && ln -s /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark \
-  && rm -rf /opt/spark/examples \
-  && rm /opt/spark/lib/spark-examples*.jar
+  | tar x -C /opt/
+#  && ln -s /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark
+#  && rm -rf /opt/spark/examples \
+#  && rm /opt/spark/lib/spark-examples*.jar
+
+RUN mv /opt/spark-$SPARK_VERSION-bin-hadoop$HADOOP_PROFILE /opt/spark
+
+ENV SPARK_HOME /opt/spark
+
+# RUN curl http://apache.belnet.be/spark/spark-1.5.2/spark-1.5.2-bin-hadoop2.6.tgz -o spark-1.5.2-bin-hadoop2.6.tgz
+# RUN tar xvfz spark-1.5.2-bin-hadoop2.6.tgz
 
 ### ZEPPELIN ###
 
@@ -169,8 +169,7 @@ ADD resources/hadoop /etc/hadoop/conf
 
 RUN rm -rf /root/.m2
 RUN rm -rf /root/.npm
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN yum clean all
 
 ### INTERFACE ###
 
