@@ -1,6 +1,6 @@
 # Datalayer Docker Ambari
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker/ambari).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker/ambari).
 
 [![Apache Ambari](http://platform.datalayer.io/ext/images/logo-ambari-2.png)](http://ambari.apache.org)
 

@@ -1,6 +1,6 @@
-# Datalayer Docker Zeppelin R (based on Rserve)
+# Datalayer Docker Zeppelin R (based on rscala)
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker/zeppelin-rserve).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker/zeppelin-R).
 
 [![R](http://platform.datalayer.io/ext/images/logo-R-200.png)](http://cran.r-project.org)
 

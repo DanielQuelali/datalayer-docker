@@ -1,6 +1,6 @@
 # Datalayer Docker Spitfire
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker/spitfire).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker/spitfire).
 
 [![Datalayer Spitifre](http://platform.datalayer.io/ext/images/logo-datalayer-spitfire.png)](http://datalayer.io)
 

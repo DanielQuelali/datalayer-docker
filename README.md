@@ -1,6 +1,6 @@
 # Datalayer Docker
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker).
 
 [![Docker](http://platform.datalayer.io/ext/images/docker-logo-small.png)](https://www.docker.com/)
 

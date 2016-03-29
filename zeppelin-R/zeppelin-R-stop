@@ -19,6 +19,10 @@
 
 export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
-$CUR_DIR/resources/datalayer-echo-header.sh
 
-sudo docker build -t datalayer/zeppelin-rscala:latest $CUR_DIR
+echo
+echo Stopping container zeppelin-R...
+docker stop zeppelin-R
+echo
+echo Removing container zeppelin-R...
+docker rm zeppelin-R

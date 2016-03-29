@@ -1,6 +1,6 @@
 # Datalayer Docker Spitfire Ambari
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker/spitfire-ambari).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker/spitfire-ambari).
 
 [![Datalayer Spitifre](http://platform.datalayer.io/ext/images/logo-datalayer-spitfire.png)](http://datalayer.io)
 

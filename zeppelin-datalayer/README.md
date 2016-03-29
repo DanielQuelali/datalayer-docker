@@ -1,6 +1,6 @@
 # Datalayer Docker Zeppelin
 
-Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/docker/zeppelin).
+Read the documentation on the [Datalayer Guide](http://platform.datalayer.io/guide/latest/docker/zeppelin-datalayer).
 
 [![Apache Zeppelin](http://platform.datalayer.io/ext/images/logo-zeppelin-small.png)](http://zeppelin.incubator.apache.org)
 
