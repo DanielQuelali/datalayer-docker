@@ -21,7 +21,7 @@ export CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $CUR_DIR/resources/datalayer-cli-colors.sh
 $CUR_DIR/resources/datalayer-echo-header.sh
 
-docker rm -f zeppelin-R > /dev/null 2>&1
+docker rm -f zeppelin-r > /dev/null 2>&1
 
 if [ -z "$DOCKER_ZEPPELIN_PORT" ]
 then
@@ -65,6 +65,6 @@ sudo docker run \
     -e ZEPPELIN_NOTEBOOK_DIR=$DOCKER_ZEPPELIN_NOTEBOOK_DIR \
     -e MASTER=$DOCKER_SPARK_MASTER \
     -e SPARK_HOME=/opt/spark \
-    -h zeppelin-R.datalayer.io.local \
-    --name zeppelin-R \
-    datalayer/zeppelin-R "$@"
+    -h zeppelin-r.datalayer.io.local \
+    --name zeppelin-r \
+    datalayer/zeppelin-r "$@"
