@@ -141,6 +141,7 @@ RUN mvn clean \
   -Dhadoop.version=$HADOOP_VERSION \
   -Pspark-$SPARK_PROFILE \
   -Dspark.version=$SPARK_VERSION \
+  -Psparkr \
   -Ppyspark \
   -Dscala.version=$SCALA_VERSION \
   -Dscala.binary.version=$SCALA_BINARY_VERSION \
