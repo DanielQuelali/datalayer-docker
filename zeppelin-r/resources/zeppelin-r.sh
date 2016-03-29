@@ -50,7 +50,7 @@ fi
 
 echo
 echo
-echo -e $YELLOW"Bye bye Zeppelin user... Hope to seen you back soon!"$NOCOLOR
+echo -e $YELLOW"Bye bye Zeppelin user... Hope to seen you back soon! Type exit to quit Docker."$NOCOLOR
 echo
 echo
 

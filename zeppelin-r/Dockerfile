@@ -157,7 +157,7 @@ RUN mvn clean \
 
 COPY ./resources/datalayer-cli-colors.sh $ZEPPELIN_HOME/bin/datalayer-cli-colors.sh
 COPY ./resources/datalayer-echo-header.sh $ZEPPELIN_HOME/bin/datalayer-echo-header.sh
-COPY ./resources/datalayer-zeppelin.sh $ZEPPELIN_HOME/bin/datalayer-zeppelin.sh
+COPY ./resources/zeppelin-r.sh $ZEPPELIN_HOME/bin/zeppelin-r.sh
 COPY ./resources/log4j.properties $ZEPPELIN_HOME/conf/log4j.properties
 COPY ./resources/zeppelin-env.sh $ZEPPELIN_HOME/conf/zeppelin-env.sh
 
@@ -203,4 +203,4 @@ EXPOSE 8080
 
 ### ENTRY POINT ###
 
-ENTRYPOINT ["/opt/zeppelin/bin/datalayer-zeppelin.sh"]
+ENTRYPOINT ["/opt/zeppelin/bin/zeppelin-r.sh"]
