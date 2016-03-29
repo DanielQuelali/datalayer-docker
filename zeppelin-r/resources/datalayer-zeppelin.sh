@@ -53,3 +53,6 @@ echo
 echo -e $YELLOW"Bye bye Zeppelin user... Hope to seen you back soon!"$NOCOLOR
 echo
 echo
+
+/bin/bash
+
