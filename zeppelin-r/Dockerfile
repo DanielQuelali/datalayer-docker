@@ -148,7 +148,7 @@ RUN mvn clean \
   -Dmaven.findbugs.enable=false \
   -Drat.skip=true \
   -Dcheckstyle.skip=true \
-  -pl '!cassandra,!elasticsearch,!flink,!hive,!ignite,!kylin,!lens,!phoenix,!postgresql,!tajo' \
+  -pl '!alluxio,!cassandra,!elasticsearch,!file,!flink,!hbase,!hive,!ignite,!jdbc,!kylin,!lens,!phoenix,!postgresql,!shell,!tajo' \
   -DskipTests
 
 # Temporary fix to deal with conflicting akka provided jackson jars.
