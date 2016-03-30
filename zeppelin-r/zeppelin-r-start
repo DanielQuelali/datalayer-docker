@@ -68,6 +68,7 @@ sudo docker run \
     -e MASTER=$DOCKER_SPARK_MASTER \
     -e SPARK_HOME=/opt/spark \
     -h zeppelin-r.datalayer.io.local \
+    --privileged \
     --name zeppelin-r \
-    --entrypoint=/opt/zeppelin/bin/zeppelin-r.sh  \
+    --entrypoint=/opt/zeppelin/bin/zeppelin-r.sh \
     datalayer/zeppelin-r "$@"

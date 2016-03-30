@@ -84,8 +84,9 @@ docker \
   -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
   -e SPITFIRE_HOME=/opt/datalayer-spitfire \
   -h spitfire-ambari.datalayer.io.local \
-  --name spitfire-ambari \
   --privileged \
+  --name spitfire-ambari \
+  --entrypoint=/start-spitfire-ambari.sh \
   datalayer/spitfire-ambari:centos-6 "$@"
 
 if [ "$DATALAYER_DOCKER_DETACHED" == "true" ]

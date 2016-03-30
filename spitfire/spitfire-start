@@ -37,6 +37,7 @@ docker \
   -e DOCKER_SPITFIRE_LOG_CONSOLE=true \
   -e SPITFIRE_HOME=/opt/datalayer-spitfire \
   -h spitfire.datalayer.io.local \
-  --name spitfire \
   --privileged \
+  --name spitfire \
+  --entrypoint=/start-spitfire.sh \
   datalayer/spitfire:centos-6 "$@"
