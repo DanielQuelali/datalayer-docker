@@ -27,6 +27,8 @@ then
   export DATALAYER_DOCKER_DETACHED=false
 fi
 
+#  -p 123:123/udp \
+
 docker \
   run \
   -d=$DATALAYER_DOCKER_DETACHED \
@@ -35,7 +37,6 @@ docker \
   -P \
   -p 88:88/tcp \
   -p 88:88/udp \
-  -p 123:123/udp \
   -p 389:389 \
   -p 443:443 \
   -p 464:464/tcp \

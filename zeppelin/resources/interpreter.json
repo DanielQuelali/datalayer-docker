@@ -1,7 +1,37 @@
 {
   "interpreterSettings": {
-    "2B5BVYQZU": {
-      "id": "2B5BVYQZU",
+    "2B62PNUW4": {
+      "id": "2B62PNUW4",
+      "name": "r",
+      "group": "r",
+      "properties": {},
+      "interpreterGroup": [
+        {
+          "class": "io.datalayer.zeppelin.R.RInterpreter",
+          "name": "r"
+        }
+      ],
+      "option": {
+        "remote": true
+      }
+    },
+    "2B3MBZ7R9": {
+      "id": "2B3MBZ7R9",
+      "name": "md",
+      "group": "md",
+      "properties": {},
+      "interpreterGroup": [
+        {
+          "class": "org.apache.zeppelin.markdown.Markdown",
+          "name": "md"
+        }
+      ],
+      "option": {
+        "remote": true
+      }
+    },
+    "2B44ZXSMW": {
+      "id": "2B44ZXSMW",
       "name": "spark",
       "group": "spark",
       "properties": {
@@ -41,8 +71,8 @@
         "remote": true
       }
     },
-    "2B5334HVY": {
-      "id": "2B5334HVY",
+    "2B4ZA948M": {
+      "id": "2B4ZA948M",
       "name": "angular",
       "group": "angular",
       "properties": {},
@@ -56,23 +86,8 @@
         "remote": true
       }
     },
-    "2B4ZF74G5": {
-      "id": "2B4ZF74G5",
-      "name": "md",
-      "group": "md",
-      "properties": {},
-      "interpreterGroup": [
-        {
-          "class": "org.apache.zeppelin.markdown.Markdown",
-          "name": "md"
-        }
-      ],
-      "option": {
-        "remote": true
-      }
-    },
-    "2B3XD8VGK": {
-      "id": "2B3XD8VGK",
+    "2B4XEVGV6": {
+      "id": "2B4XEVGV6",
       "name": "sh",
       "group": "sh",
       "properties": {},
@@ -88,11 +103,18 @@
     }
   },
   "interpreterBindings": {
-    "tutorial": [
-      "2B5BVYQZU",
-      "2B4ZF74G5",
-      "2B5334HVY",
-      "2B3XD8VGK"
+    "r": [
+      "2B44ZXSMW",
+      "2B3MBZ7R9",
+      "2B4ZA948M",
+      "2B4XEVGV6",
+      "2B62PNUW4"
+    ],
+    "2A94M5J1Z": [
+      "2B44ZXSMW",
+      "2B3MBZ7R9",
+      "2B4ZA948M",
+      "2B4XEVGV6"
     ]
   }
 }

@@ -65,6 +65,27 @@ ENV JAVA_HOME /opt/jdk1.8.0_31
 RUN ln -s $JAVA_HOME /opt/java
 ENV PATH $JAVA_HOME/bin:$PATH
 
+### SCALA ###
+
+# WORKDIR /opt
+# RUN curl http://www.scala-lang.org/files/archive/scala-2.10.4.tgz -o scala-2.10.4.tgz
+# RUN tar xvfz scala-2.10.4.tgz
+# RUN rm scala-2.10.4.tgz
+
+# ENV SCALA_HOME /opt/scala-2.10.4
+# ENV PATH $SCALA_HOME/bin:$PATH
+
+### R ###
+
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+RUN yum install -y R R-devel libcurl-devel openssl-devel
+
+# RUN curl https://cran.r-project.org/src/contrib/Archive/rscala/rscala_1.0.6.tar.gz -o /opt/rscala_1.0.6.tar.gz
+# RUN R CMD INSTALL /opt/rscala_1.0.6.tar.gz
+
+COPY resources/install-R-packages.R /opt/install-R-packages.R
+RUN R CMD BATCH /opt/install-R-packages.R /opt/install-R-packages.R.out
+
 ### PYTHON ###
 
 RUN yum install -y python python-setuptools python-dev numpy python-pip python-matplotlib python-pandas python-pandasql ipython python-nose python-sympy
