@@ -128,7 +128,7 @@ ENV PATH $ZEPPELIN_HOME/zeppelin-web/node_modules/grunt-cli/bin:$PATH
 
 RUN git config --global url."https://".insteadOf git://
 
-RUN git clone  $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
+RUN git clone -b pyspark-build $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
 
 WORKDIR $ZEPPELIN_HOME
 
