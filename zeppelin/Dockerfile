@@ -142,7 +142,7 @@ RUN mvn clean \
   -Pspark-$SPARK_PROFILE \
   -Dspark.version=$SPARK_VERSION \
   -Ppyspark \
-  -PsparkR \
+  -Psparkr \
   -Dscala.version=$SCALA_VERSION \
   -Dscala.binary.version=$SCALA_BINARY_VERSION \
   -Dmaven.findbugs.enable=false \
