@@ -30,7 +30,7 @@ RUN yum install -y vim git wget unzip curl \
 RUN yum install -y freetype fontconfig
 
 ENV ZEPPELIN_REPO_URL        https://github.com/datalayer/zeppelin-datalayer.git
-ENV ZEPPELIN_REPO_BRANCH     master
+ENV ZEPPELIN_REPO_BRANCH     pyspark-build
 ENV ZEPPELIN_HOME            /opt/zeppelin
 ENV ZEPPELIN_CONF_DIR        $ZEPPELIN_HOME/conf
 ENV ZEPPELIN_NOTEBOOK_DIR    $ZEPPELIN_HOME/notebook
@@ -128,7 +128,7 @@ ENV PATH $ZEPPELIN_HOME/zeppelin-web/node_modules/grunt-cli/bin:$PATH
 
 RUN git config --global url."https://".insteadOf git://
 
-RUN git clone -b pyspark-build $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
+RUN git clone $ZEPPELIN_REPO_URL $ZEPPELIN_HOME
 
 WORKDIR $ZEPPELIN_HOME
 
